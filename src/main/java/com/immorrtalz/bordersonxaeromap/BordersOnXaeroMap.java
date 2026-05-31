@@ -25,7 +25,7 @@ public class BordersOnXaeroMap
 	public static void initializeRepository()
 	{
 		if (repository != null) return;
-		Path savePath = FMLPaths.CONFIGDIR.get().resolve("xaero-local-zones.json");
+		Path savePath = FMLPaths.CONFIGDIR.get().resolve("bordersonxaeromap.json");
 		repository = new ZoneRepository(savePath);
 		LOGGER.info("Initialized local zones storage at {}", savePath);
 	}

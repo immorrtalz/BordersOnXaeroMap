@@ -11,6 +11,7 @@
 	"borders_on_xaero_map.this_action_cannot_be_undone": "This action cannot be undone.",
 	"borders_on_xaero_map.zone_name": "Zone name",
 	"borders_on_xaero_map.chunks": "chunks",
+	"borders_on_xaero_map.OK": "OK",
 
 	"borders_on_xaero_map.toolbar_button.zones_visibility_on": "Show zones: ON",
 	"borders_on_xaero_map.toolbar_button.zones_visibility_off": "Show zones: OFF",
@@ -39,5 +40,12 @@
 	"borders_on_xaero_map.color.purple": "Purple",
 	"borders_on_xaero_map.color.pink": "Pink",
 	"borders_on_xaero_map.color.white": "White",
-	"borders_on_xaero_map.color.black": "Black"
+	"borders_on_xaero_map.color.black": "Black",
+
+	"borders_on_xaero_map.help.title": "Tips",
+	"borders_on_xaero_map.help.line1": "When not in the draw mode: click on any zone to make it active. Click to any empty spot to clear the active zone.",
+	"borders_on_xaero_map.help.line2": "When in the draw mode: hold and drag LMB to select chunks, release to create a new zone (Shift + LMB to erase).",
+	"borders_on_xaero_map.help.line3": "When you draw while there is an active zone, selected chunks will be added to the active zone, otherwise a new zone will be created.",
+	"borders_on_xaero_map.help.line4": "Double-click on a zone to edit it. In the edit mode, you can change the name, border and fill colors.",
+	"borders_on_xaero_map.help.line5": "You can also use the right-side toolbar with Edit and Delete buttons - both of which require an active zone."
 }

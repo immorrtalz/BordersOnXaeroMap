@@ -16,7 +16,6 @@ import java.util.Set;
 
 public final class ZoneRepository
 {
-	private static final int CURRENT_VERSION = 1;
 	public static final int MAX_SELECTION_CHUNKS = 8192;
 
 	private final Path filePath;
@@ -195,7 +194,6 @@ public final class ZoneRepository
 	private SaveRoot buildSaveRoot()
 	{
 		SaveRoot root = new SaveRoot();
-		root.version = CURRENT_VERSION;
 
 		for (Map.Entry<String, Map<String, ZoneDimension>> worldEntry : worldsById.entrySet())
 		{
@@ -297,7 +295,6 @@ public final class ZoneRepository
 
 	private static final class SaveRoot
 	{
-		private int version;
 		private Map<String, SaveWorld> worlds = new LinkedHashMap<>();
 	}
 

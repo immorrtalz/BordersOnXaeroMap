@@ -4,6 +4,9 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+
+import javax.annotation.Nonnull;
+
 import org.lwjgl.glfw.GLFW;
 
 public class DeleteZoneScreen extends Screen
@@ -69,7 +72,7 @@ public class DeleteZoneScreen extends Screen
 	}
 
 	@Override
-	public void render(GuiGraphics drawContext, int mouseX, int mouseY, float delta)
+	public void render(@Nonnull GuiGraphics drawContext, int mouseX, int mouseY, float delta)
 	{
 		drawContext.fill(0, 0, width, height, -1442840576);
 		super.render(drawContext, mouseX, mouseY, delta);

@@ -11,6 +11,7 @@
 	"borders_on_xaero_map.this_action_cannot_be_undone": "Это действие нельзя отменить.",
 	"borders_on_xaero_map.zone_name": "Название зоны",
 	"borders_on_xaero_map.chunks": "чанков",
+	"borders_on_xaero_map.OK": "ОК",
 
 	"borders_on_xaero_map.toolbar_button.zones_visibility_on": "Отображение зон: ВКЛ.",
 	"borders_on_xaero_map.toolbar_button.zones_visibility_off": "Отображение зон: ВЫКЛ.",
@@ -39,5 +40,12 @@
 	"borders_on_xaero_map.color.purple": "Пурпурный",
 	"borders_on_xaero_map.color.pink": "Розовый",
 	"borders_on_xaero_map.color.white": "Белый",
-	"borders_on_xaero_map.color.black": "Чёрный"
+	"borders_on_xaero_map.color.black": "Чёрный",
+
+	"borders_on_xaero_map.help.title": "Подсказки",
+	"borders_on_xaero_map.help.line1": "Вне режима рисования: кликните на любую зону, чтобы сделать её активной. Кликните на пустое место, чтобы убрать активную зону.",
+	"borders_on_xaero_map.help.line2": "В режиме рисования: удерживайте и перетаскивайте ЛКМ для выбора чанков, отпустите, чтобы создать новую зону (Shift + ЛКМ, чтобы стереть).",
+	"borders_on_xaero_map.help.line3": "При рисовании выбранные чанки будут добавлены к активной зоне, а если её нет, будет создана новая зона.",
+	"borders_on_xaero_map.help.line4": "Нажмите на зону дважды, чтобы редактировать её. В режиме редактирования вы можете изменить название, цвет границы и заливки.",
+	"borders_on_xaero_map.help.line5": "Вы также можете использовать правую панель инструментов с кнопками Редактировать и Удалить - обе требуют наличия активной зоны."
 }

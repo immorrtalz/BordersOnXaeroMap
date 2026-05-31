@@ -3,18 +3,19 @@ package com.immorrtalz.bordersonxaeromap.client;
 import com.immorrtalz.bordersonxaeromap.BordersOnXaeroMap;
 import com.immorrtalz.bordersonxaeromap.client.screen.EditZoneScreen;
 import com.immorrtalz.bordersonxaeromap.client.screen.DeleteZoneScreen;
-import com.immorrtalz.bordersonxaeromap.zone.ChunkRect;
+import com.immorrtalz.bordersonxaeromap.client.screen.HelpScreen;
 import com.immorrtalz.bordersonxaeromap.zone.ZoneArea;
 import com.immorrtalz.bordersonxaeromap.zone.ZoneDimension;
-import com.immorrtalz.bordersonxaeromap.zone.ZonePalette;
 import com.immorrtalz.bordersonxaeromap.zone.ZoneRepository;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
+
+import javax.annotation.Nonnull;
+
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -61,7 +62,10 @@ public final class MapScreenHooks
 	private static final int ICON_DELETE_U = 48;
 	private static final int ICON_DELETE_V = 0;
 
-	private static final int GUI_TEXTURE_SIZE = 256;
+	private static final int ICON_HELP_U = 0;
+	private static final int ICON_HELP_V = 16;
+
+	private static final int GUI_TEXTURE_SIZE = 64;
 
 	private static final ResourceLocation GUI_TEXTURE = ResourceLocation.fromNamespaceAndPath("bordersonxaeromap", "gui/gui.png");
 
@@ -89,6 +93,7 @@ public final class MapScreenHooks
 		session.drawToggleButton = null;
 		session.editZoneButton = null;
 		session.deleteZoneButton = null;
+		session.helpButton = null;
 	}
 
 	@SubscribeEvent
@@ -164,11 +169,12 @@ public final class MapScreenHooks
 		int row2Y = row1Y + BUTTON_SIZE + TOOLBAR_GAP;
 		int row3Y = row2Y + BUTTON_SIZE + TOOLBAR_GAP;
 		int row4Y = row3Y + BUTTON_SIZE + TOOLBAR_GAP;
+		int row5Y = row4Y + BUTTON_SIZE + TOOLBAR_GAP;
 
 		session.toolbarLeft = columnX;
 		session.toolbarTop = row1Y;
 		session.toolbarRight = columnX + BUTTON_SIZE;
-		session.toolbarBottom = row4Y + BUTTON_SIZE;
+		session.toolbarBottom = row5Y + BUTTON_SIZE;
 
 		session.visibilityToggleButton = addToolbarButton(event, new XaeroIconButton(columnX, row1Y, ICON_VISIBILITY_ON_U, ICON_VISIBILITY_ON_V,
 			Component.translatable("borders_on_xaero_map.toolbar_button.zones_visibility_on"),
@@ -185,6 +191,10 @@ public final class MapScreenHooks
 		session.deleteZoneButton = addToolbarButton(event, new XaeroIconButton(columnX, row4Y, ICON_DELETE_U, ICON_DELETE_V,
 			Component.translatable("borders_on_xaero_map.delete_zone"),
 			button -> deleteFocusedZone(screen)));
+
+		session.helpButton = addToolbarButton(event, new XaeroIconButton(columnX, row5Y, ICON_HELP_U, ICON_HELP_V,
+			Component.translatable("borders_on_xaero_map.help.title"),
+			button -> openHelpScreen(screen)));
 	}
 
 	private static void onAfterRender(Screen screen, GuiGraphics drawContext, double mouseX, double mouseY, float delta)
@@ -216,12 +226,13 @@ public final class MapScreenHooks
 		ZoneRepository repository = BordersOnXaeroMap.getRepository();
 		if (repository == null) return true;
 
+		// Don't change the active zone for Shift key presses (prevents changing while holding Shift)
+		if (keyCode == GLFW.GLFW_KEY_LEFT_SHIFT || keyCode == GLFW.GLFW_KEY_RIGHT_SHIFT)
+			return true;
+
 		ScreenSession session = session(screen);
 		ZoneDimension dimension = repository.getOrCreateDimension(state.worldId(), state.dimensionId());
 		ZoneArea hoveredZone = dimension.getZoneAtChunk(state.cursorChunkX(), state.cursorChunkZ());
-		ZoneArea activeZone = resolveActiveZone(session, state, dimension);
-		ZoneArea targetZone = hoveredZone != null ? hoveredZone : activeZone;
-		ChunkRect selection = state.selectionOrCursor();
 
 		if (hoveredZone != null)
 			setActiveZone(session, state, hoveredZone.getId());
@@ -423,13 +434,6 @@ public final class MapScreenHooks
 		{
 			ZoneArea target = resolveActiveZone(session, worldId, dimensionId, dimension);
 
-			if (target == null && session.lastSelectionChunkSet)
-			{
-				target = dimension.getZoneAtChunk(session.lastSelectionChunkX, session.lastSelectionChunkZ);
-
-				if (target != null) setActiveZone(session, worldId, dimensionId, target.getId());
-			}
-
 			if (target == null)
 			{
 				ZoneArea created = repository.createZone(worldId, dimensionId, selectionCopy);
@@ -512,7 +516,6 @@ public final class MapScreenHooks
 	private static void openEditZoneScreen(Screen parent, XaeroMapReflection.MapState state, ZoneArea targetZone)
 	{
 		ZoneRepository repository = BordersOnXaeroMap.getRepository();
-
 		if (repository == null) return;
 
 		Minecraft client = Minecraft.getInstance();
@@ -535,7 +538,6 @@ public final class MapScreenHooks
 	private static void openDeleteZoneScreen(Screen parent, XaeroMapReflection.MapState state, ZoneArea targetZone)
 	{
 		ZoneRepository repository = BordersOnXaeroMap.getRepository();
-
 		if (repository == null) return;
 
 		Minecraft client = Minecraft.getInstance();
@@ -546,6 +548,15 @@ public final class MapScreenHooks
 				if (repository.deleteZone(state.worldId(), state.dimensionId(), targetZone.getId()))
 					notifyActionbar(Component.translatable("borders_on_xaero_map.actionbar.zone_deleted", targetZone.getName()));
 			}));
+	}
+
+	private static void openHelpScreen(Screen parent)
+	{
+		ZoneRepository repository = BordersOnXaeroMap.getRepository();
+		if (repository == null) return;
+
+		Minecraft client = Minecraft.getInstance();
+		client.setScreen(new HelpScreen(parent));
 	}
 
 	private static void renderZones(Screen screen, GuiGraphics drawContext, XaeroMapReflection.MapState state, ZoneDimension dimension, String activeZoneId)
@@ -641,22 +652,6 @@ public final class MapScreenHooks
 				}
 			}
 		}
-	}
-
-	private static void selectZoneAtCursor(ScreenSession session, XaeroMapReflection.MapState state, double mouseX, double mouseY)
-	{
-		ZoneRepository repository = BordersOnXaeroMap.getRepository();
-		if (repository == null) return;
-
-		ZoneDimension dimension = repository.getDimension(state.worldId(), state.dimensionId());
-		if (dimension == null) return;
-
-		int chunkX = screenToChunkX(state, mouseX);
-		int chunkZ = screenToChunkZ(state, mouseY);
-		ZoneArea clickedZone = dimension.getZoneAtChunk(chunkX, chunkZ);
-
-		if (clickedZone != null) setActiveZone(session, state, clickedZone.getId());
-		else clearActiveZone(session);
 	}
 
 	private static boolean isDoubleClick(ScreenSession session, XaeroMapReflection.MapState state, ZoneArea zone, long now)
@@ -992,7 +987,7 @@ public final class MapScreenHooks
 		private void setTooltipText(Component tooltipText) { setTooltip(Tooltip.create(tooltipText)); }
 
 		@Override
-		protected void renderWidget(GuiGraphics context, int mouseX, int mouseY, float deltaTicks)
+		protected void renderWidget(@Nonnull GuiGraphics context, int mouseX, int mouseY, float deltaTicks)
 		{
 			int iconX = getX() + getWidth() / 2 - ICON_SIZE / 2;
 			int iconY = getY() + getHeight() / 2 - ICON_SIZE / 2;
@@ -1048,6 +1043,7 @@ public final class MapScreenHooks
 		private XaeroIconButton drawToggleButton;
 		private XaeroIconButton editZoneButton;
 		private XaeroIconButton deleteZoneButton;
+		private XaeroIconButton helpButton;
 
 		private void stopSelection()
 		{
