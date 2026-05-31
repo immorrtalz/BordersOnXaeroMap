@@ -27,12 +27,17 @@
 	"borders_on_xaero_map.map_gui.selection_limit_reached": "Selection limit reached: %s/%s chunks.",
 
 	"borders_on_xaero_map.color.red": "Red",
-	"borders_on_xaero_map.color.green": "Green",
-	"borders_on_xaero_map.color.blue": "Blue",
-	"borders_on_xaero_map.color.yellow": "Yellow",
 	"borders_on_xaero_map.color.orange": "Orange",
+	"borders_on_xaero_map.color.yellow": "Yellow",
+	"borders_on_xaero_map.color.olive": "Olive",
+	"borders_on_xaero_map.color.green": "Green",
+	"borders_on_xaero_map.color.seagreen": "Seagreen",
 	"borders_on_xaero_map.color.teal": "Teal",
+	"borders_on_xaero_map.color.lightblue": "Light Blue",
+	"borders_on_xaero_map.color.blue": "Blue",
 	"borders_on_xaero_map.color.violet": "Violet",
+	"borders_on_xaero_map.color.purple": "Purple",
+	"borders_on_xaero_map.color.pink": "Pink",
 	"borders_on_xaero_map.color.white": "White",
-	"borders_on_xaero_map.color.gray": "Gray"
+	"borders_on_xaero_map.color.black": "Black"
 }

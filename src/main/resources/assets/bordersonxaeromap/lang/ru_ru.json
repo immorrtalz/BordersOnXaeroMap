@@ -27,12 +27,17 @@
 	"borders_on_xaero_map.map_gui.selection_limit_reached": "Достигнут лимит выделения: %s/%s чанков.",
 
 	"borders_on_xaero_map.color.red": "Красный",
-	"borders_on_xaero_map.color.green": "Зелёный",
-	"borders_on_xaero_map.color.blue": "Синий",
-	"borders_on_xaero_map.color.yellow": "Жёлтый",
 	"borders_on_xaero_map.color.orange": "Оранжевый",
+	"borders_on_xaero_map.color.yellow": "Жёлтый",
+	"borders_on_xaero_map.color.olive": "Оливковый",
+	"borders_on_xaero_map.color.green": "Зелёный",
+	"borders_on_xaero_map.color.seagreen": "Морской зелёный",
 	"borders_on_xaero_map.color.teal": "Бирюзовый",
+	"borders_on_xaero_map.color.lightblue": "Светло-синий",
+	"borders_on_xaero_map.color.blue": "Синий",
 	"borders_on_xaero_map.color.violet": "Фиолетовый",
+	"borders_on_xaero_map.color.purple": "Пурпурный",
+	"borders_on_xaero_map.color.pink": "Розовый",
 	"borders_on_xaero_map.color.white": "Белый",
-	"borders_on_xaero_map.color.gray": "Серый"
+	"borders_on_xaero_map.color.black": "Чёрный"
 }
