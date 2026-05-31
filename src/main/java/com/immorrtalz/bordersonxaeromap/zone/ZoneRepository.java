@@ -91,58 +91,42 @@ public final class ZoneRepository
 		return changed;
 	}
 
-	public int removeSelectionFromZone(String worldId, String dimensionId, String zoneId, ChunkRect selection) {
-		if (selection.area() > MAX_SELECTION_CHUNKS) {
-			return 0;
-		}
+	public int removeSelectionFromZone(String worldId, String dimensionId, String zoneId, ChunkRect selection)
+	{
+		if (selection.area() > MAX_SELECTION_CHUNKS) return 0;
 		return removeChunksFromZone(worldId, dimensionId, zoneId, selection.toChunkKeys());
 	}
 
-	public int removeChunksFromZone(String worldId, String dimensionId, String zoneId, Set<Long> chunkKeys) {
-		if (chunkKeys == null || chunkKeys.isEmpty() || chunkKeys.size() > MAX_SELECTION_CHUNKS) {
-			return 0;
-		}
+	public int removeChunksFromZone(String worldId, String dimensionId, String zoneId, Set<Long> chunkKeys)
+	{
+		if (chunkKeys == null || chunkKeys.isEmpty() || chunkKeys.size() > MAX_SELECTION_CHUNKS) return 0;
 
 		ZoneDimension dimension = getDimension(worldId, dimensionId);
-		if (dimension == null) {
-			return 0;
-		}
+		if (dimension == null) return 0;
 
 		int changed = dimension.removeChunksFromZone(zoneId, chunkKeys);
-		if (changed > 0) {
-			save();
-		}
+		if (changed > 0) save();
 		return changed;
 	}
 
 	public boolean deleteZone(String worldId, String dimensionId, String zoneId) {
 		ZoneDimension dimension = getDimension(worldId, dimensionId);
-		if (dimension == null) {
-			return false;
-		}
+		if (dimension == null) return false;
 
 		boolean result = dimension.deleteZone(zoneId);
-		if (result) {
-			save();
-		}
+		if (result) save();
 		return result;
 	}
 
 	public boolean renameZone(String worldId, String dimensionId, String zoneId, String newName) {
 		String cleanedName = newName == null ? "" : newName.trim();
-		if (cleanedName.isEmpty()) {
-			return false;
-		}
+		if (cleanedName.isEmpty()) return false;
 
 		ZoneDimension dimension = getDimension(worldId, dimensionId);
-		if (dimension == null) {
-			return false;
-		}
+		if (dimension == null) return false;
 
 		boolean result = dimension.renameZone(zoneId, cleanedName);
-		if (result) {
-			save();
-		}
+		if (result) save();
 		return result;
 	}
 
@@ -159,14 +143,10 @@ public final class ZoneRepository
 	public boolean cycleBorderColor(String worldId, String dimensionId, String zoneId)
 	{
 		ZoneDimension dimension = getDimension(worldId, dimensionId);
-		if (dimension == null) {
-			return false;
-		}
+		if (dimension == null) return false;
 
 		boolean result = dimension.cycleBorderColor(zoneId);
-		if (result) {
-			save();
-		}
+		if (result) save();
 		return result;
 	}
 
@@ -183,30 +163,31 @@ public final class ZoneRepository
 	public boolean cycleFillColor(String worldId, String dimensionId, String zoneId)
 	{
 		ZoneDimension dimension = getDimension(worldId, dimensionId);
-		if (dimension == null) {
-			return false;
-		}
+		if (dimension == null) return false;
 
 		boolean result = dimension.cycleFillColor(zoneId);
-		if (result) {
-			save();
-		}
+		if (result) save();
 		return result;
 	}
 
 	public void save()
 	{
-		try {
+		try
+		{
 			Path parent = filePath.getParent();
-			if (parent != null) {
+
+			if (parent != null)
 				Files.createDirectories(parent);
-			}
 
 			SaveRoot root = buildSaveRoot();
-			try (Writer writer = Files.newBufferedWriter(filePath)) {
+
+			try (Writer writer = Files.newBufferedWriter(filePath))
+			{
 				gson.toJson(root, writer);
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			BordersOnXaeroMap.LOGGER.error("Failed to save local zones", e);
 		}
 	}
@@ -216,15 +197,18 @@ public final class ZoneRepository
 		SaveRoot root = new SaveRoot();
 		root.version = CURRENT_VERSION;
 
-		for (Map.Entry<String, Map<String, ZoneDimension>> worldEntry : worldsById.entrySet()) {
+		for (Map.Entry<String, Map<String, ZoneDimension>> worldEntry : worldsById.entrySet())
+		{
 			SaveWorld world = new SaveWorld();
 			root.worlds.put(worldEntry.getKey(), world);
 
-			for (Map.Entry<String, ZoneDimension> dimEntry : worldEntry.getValue().entrySet()) {
+			for (Map.Entry<String, ZoneDimension> dimEntry : worldEntry.getValue().entrySet())
+			{
 				SaveDimension dim = new SaveDimension();
 				world.dimensions.put(dimEntry.getKey(), dim);
 
-				for (ZoneArea zone : dimEntry.getValue().getZones()) {
+				for (ZoneArea zone : dimEntry.getValue().getZones())
+				{
 					SaveZone zoneSave = new SaveZone();
 					zoneSave.id = zone.getId();
 					zoneSave.name = zone.getName();
@@ -239,18 +223,20 @@ public final class ZoneRepository
 		return root;
 	}
 
-	private void load() {
-		if (!Files.exists(filePath)) {
-			return;
-		}
+	private void load()
+	{
+		if (!Files.exists(filePath)) return;
 
-		try (Reader reader = Files.newBufferedReader(filePath)) {
+		try (Reader reader = Files.newBufferedReader(filePath))
+		{
 			SaveRoot root = gson.fromJson(reader, SaveRoot.class);
-			if (root == null || root.worlds == null) {
-				return;
-			}
+
+			if (root == null || root.worlds == null) return;
+
 			loadFromRoot(root);
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			BordersOnXaeroMap.LOGGER.error("Failed to load local zones from {}", filePath, e);
 		}
 	}
@@ -258,30 +244,33 @@ public final class ZoneRepository
 	private void loadFromRoot(SaveRoot root)
 	{
 		worldsById.clear();
-		for (Map.Entry<String, SaveWorld> worldEntry : root.worlds.entrySet()) {
+
+		for (Map.Entry<String, SaveWorld> worldEntry : root.worlds.entrySet())
+		{
 			String worldId = normalizeWorldId(worldEntry.getKey());
 			Map<String, ZoneDimension> byDim = worldsById.computeIfAbsent(worldId, ignored -> new LinkedHashMap<>());
 			SaveWorld saveWorld = worldEntry.getValue();
-			if (saveWorld == null || saveWorld.dimensions == null) {
-				continue;
-			}
 
-			for (Map.Entry<String, SaveDimension> dimEntry : saveWorld.dimensions.entrySet()) {
+			if (saveWorld == null || saveWorld.dimensions == null) continue;
+
+			for (Map.Entry<String, SaveDimension> dimEntry : saveWorld.dimensions.entrySet())
+			{
 				String dimId = normalizeDimensionId(dimEntry.getKey());
 				SaveDimension saveDimension = dimEntry.getValue();
-				if (saveDimension == null || saveDimension.zones == null) {
-					continue;
-				}
+
+				if (saveDimension == null || saveDimension.zones == null) continue;
 
 				ZoneDimension dim = byDim.computeIfAbsent(dimId, ignored -> new ZoneDimension());
-				for (SaveZone saveZone : saveDimension.zones) {
-					if (saveZone == null || saveZone.id == null || saveZone.name == null || saveZone.chunks == null) {
-						continue;
-					}
+
+				for (SaveZone saveZone : saveDimension.zones)
+				{
+					if (saveZone == null || saveZone.id == null || saveZone.name == null || saveZone.chunks == null) continue;
+
 					ZoneArea loaded = new ZoneArea(saveZone.id, saveZone.name, saveZone.borderColor, saveZone.fillColor);
-					for (long key : saveZone.chunks) {
+
+					for (long key : saveZone.chunks)
 						loaded.addChunk(key);
-					}
+
 					dim.addLoadedZone(loaded);
 				}
 			}
