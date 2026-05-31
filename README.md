@@ -1,5 +1,6 @@
 <img src=".github/ReadmeHeader.png" alt="BordersOnXaeroMap"/>
 
+[![Total Downloads on GitHub](https://img.shields.io/github/downloads/immorrtalz/BordersOnXaeroMap/total?label=total%20downloads&color=blue)](https://github.com/immorrtalz/BordersOnXaeroMap/releases)
 [![License](https://img.shields.io/badge/license-GPL%20v3-yellow?color=goldenrod)](https://github.com/immorrtalz/BordersOnXaeroMap/blob/main/LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/immorrtalz/BordersOnXaeroMap?color=orange)]()
 [![Discord](https://img.shields.io/discord/600372807062519848?label=developer's%20discord&color=slateblue)](https://discord.gg/GbzYVdF)
