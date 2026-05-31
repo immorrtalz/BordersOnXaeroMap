@@ -1,0 +1,38 @@
+{
+	"borders_on_xaero_map.settings.category_title": "Borders on Xaero Map",
+
+	"borders_on_xaero_map.zone_prefix": "Зона ",
+	"borders_on_xaero_map.border_color": "Цвет границы",
+	"borders_on_xaero_map.fill_color": "Цвет заливки",
+	"borders_on_xaero_map.edit_zone": "Редактировать зону",
+	"borders_on_xaero_map.delete": "Удалить",
+	"borders_on_xaero_map.delete_zone": "Удалить зону",
+	"borders_on_xaero_map.delete_zone_question": "Удалить эту зону?",
+	"borders_on_xaero_map.this_action_cannot_be_undone": "Это действие нельзя отменить.",
+	"borders_on_xaero_map.zone_name": "Название зоны",
+	"borders_on_xaero_map.chunks": "чанков",
+
+	"borders_on_xaero_map.toolbar_button.zones_visibility_on": "Отображение зон: ВКЛ.",
+	"borders_on_xaero_map.toolbar_button.zones_visibility_off": "Отображение зон: ВЫКЛ.",
+	"borders_on_xaero_map.toolbar_button.draw_mode_on": "Режим рисования: ВКЛ.",
+	"borders_on_xaero_map.toolbar_button.draw_mode_off": "Режим рисования: ВЫКЛ.",
+	"borders_on_xaero_map.toolbar_button.delete": "Удалить зону",
+
+	"borders_on_xaero_map.actionbar.zone_created": "Зона \"%s\" создана.",
+	"borders_on_xaero_map.actionbar.zone_deleted": "Зона \"%s\" удалена.",
+
+	"borders_on_xaero_map.map_gui.active_zone": "Активная зона: %s (%s чанков)",
+	"borders_on_xaero_map.map_gui.active_zone_none": "Активная зона: нет",
+	"borders_on_xaero_map.map_gui.selection_chunks": "Текущее выделение: %s/%s чанков",
+	"borders_on_xaero_map.map_gui.selection_limit_reached": "Достигнут лимит выделения: %s/%s чанков.",
+
+	"borders_on_xaero_map.color.red": "Красный",
+	"borders_on_xaero_map.color.green": "Зелёный",
+	"borders_on_xaero_map.color.blue": "Синий",
+	"borders_on_xaero_map.color.yellow": "Жёлтый",
+	"borders_on_xaero_map.color.orange": "Оранжевый",
+	"borders_on_xaero_map.color.teal": "Бирюзовый",
+	"borders_on_xaero_map.color.violet": "Фиолетовый",
+	"borders_on_xaero_map.color.white": "Белый",
+	"borders_on_xaero_map.color.gray": "Серый"
+}

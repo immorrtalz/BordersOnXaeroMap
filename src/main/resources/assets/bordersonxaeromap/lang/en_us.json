@@ -1,0 +1,38 @@
+{
+	"borders_on_xaero_map.settings.category_title": "Borders on Xaero Map",
+
+	"borders_on_xaero_map.zone_prefix": "Zone ",
+	"borders_on_xaero_map.border_color": "Border color",
+	"borders_on_xaero_map.fill_color": "Fill color",
+	"borders_on_xaero_map.edit_zone": "Edit Zone",
+	"borders_on_xaero_map.delete": "Delete",
+	"borders_on_xaero_map.delete_zone": "Delete Zone",
+	"borders_on_xaero_map.delete_zone_question": "Delete this zone?",
+	"borders_on_xaero_map.this_action_cannot_be_undone": "This action cannot be undone.",
+	"borders_on_xaero_map.zone_name": "Zone name",
+	"borders_on_xaero_map.chunks": "chunks",
+
+	"borders_on_xaero_map.toolbar_button.zones_visibility_on": "Show zones: ON",
+	"borders_on_xaero_map.toolbar_button.zones_visibility_off": "Show zones: OFF",
+	"borders_on_xaero_map.toolbar_button.draw_mode_on": "Draw mode: ON",
+	"borders_on_xaero_map.toolbar_button.draw_mode_off": "Draw mode: OFF",
+	"borders_on_xaero_map.toolbar_button.delete": "Delete zone",
+
+	"borders_on_xaero_map.actionbar.zone_created": "Zone \"%s\" created.",
+	"borders_on_xaero_map.actionbar.zone_deleted": "Zone \"%s\" deleted.",
+
+	"borders_on_xaero_map.map_gui.active_zone": "Active zone: %s (%s chunks)",
+	"borders_on_xaero_map.map_gui.active_zone_none": "Active zone: none",
+	"borders_on_xaero_map.map_gui.selection_chunks": "Current selection: %s/%s chunks",
+	"borders_on_xaero_map.map_gui.selection_limit_reached": "Selection limit reached: %s/%s chunks.",
+
+	"borders_on_xaero_map.color.red": "Red",
+	"borders_on_xaero_map.color.green": "Green",
+	"borders_on_xaero_map.color.blue": "Blue",
+	"borders_on_xaero_map.color.yellow": "Yellow",
+	"borders_on_xaero_map.color.orange": "Orange",
+	"borders_on_xaero_map.color.teal": "Teal",
+	"borders_on_xaero_map.color.violet": "Violet",
+	"borders_on_xaero_map.color.white": "White",
+	"borders_on_xaero_map.color.gray": "Gray"
+}
