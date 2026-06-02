@@ -1,6 +1,6 @@
-package com.immorrtalz.bordersonxaeromap.client.screen;
+package com.immorrtalz.bordersonxaeromap.client.screens;
 
-import com.immorrtalz.bordersonxaeromap.zone.ZonePalette;
+import com.immorrtalz.bordersonxaeromap.common.ZonePalette;
 import java.util.function.Consumer;
 
 import javax.annotation.Nonnull;
@@ -58,7 +58,7 @@ public class EditZoneScreen extends Screen
 		nameField.setFocused(true);
 		addRenderableWidget(nameField);
 
-		borderColorButton = Button.builder(ZonePalette.colorName(initialBorderColor), button -> changeBorderColor())
+		borderColorButton = Button.builder(ZonePalette.getColorName(initialBorderColor), button -> changeBorderColor())
 			.pos(centerX - 110, centerY + 13)
 			.size(108, 20)
 			.build();
@@ -67,7 +67,7 @@ public class EditZoneScreen extends Screen
 
 		addRenderableWidget(borderColorButton);
 
-		fillColorButton = Button.builder(ZonePalette.colorName(initialFillColor), button -> changeFillColor())
+		fillColorButton = Button.builder(ZonePalette.getColorName(initialFillColor), button -> changeFillColor())
 			.pos(centerX + 2, centerY + 13)
 			.size(108, 20)
 			.build();
@@ -107,15 +107,15 @@ public class EditZoneScreen extends Screen
 
 	private void changeBorderColor()
 	{
-		newBorderColor = ZonePalette.nextBorderColor(newBorderColor);
-		borderColorButton.setMessage(ZonePalette.colorName(newBorderColor));
+		newBorderColor = ZonePalette.nextColor(newBorderColor, true);
+		borderColorButton.setMessage(ZonePalette.getColorName(newBorderColor));
 		borderColorButton.setFGColor(newBorderColor);
 	}
 
 	private void changeFillColor()
 	{
-		newFillColor = ZonePalette.nextFillColor(newFillColor);
-		fillColorButton.setMessage(ZonePalette.colorName(newFillColor));
+		newFillColor = ZonePalette.nextColor(newFillColor, false);
+		fillColorButton.setMessage(ZonePalette.getColorName(newFillColor));
 		fillColorButton.setFGColor(newFillColor);
 	}
 

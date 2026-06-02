@@ -1,10 +1,10 @@
-package com.immorrtalz.bordersonxaeromap.zone;
+package com.immorrtalz.bordersonxaeromap.common;
 
 import net.minecraft.network.chat.Component;
 
-public final class ZonePalette
+public class ZonePalette
 {
-	private static final int[] COLORS = new int[]
+	public static final int[] COLORS = new int[]
 	{
 		0xFFE73C3C, // red
 		0xFFE67B2E, // orange
@@ -40,34 +40,29 @@ public final class ZonePalette
 		"borders_on_xaero_map.color.black"
 	};
 
-	public static int defaultBorder(int zoneIndex) { return COLORS[Math.floorMod(zoneIndex, COLORS.length)]; }
-	public static int defaultFill(int zoneIndex) { return withAlpha(defaultBorder(zoneIndex), 102); }
-
-	public static int nextBorderColor(int current)
+	public static int nextColor(int current, boolean isBorder)
 	{
-		int idx = findIndex(COLORS, stripAlpha(current));
-		return COLORS[(idx + 1) % COLORS.length];
+		int index = findColorIndex(COLORS, stripAlpha(current));
+		return withAlpha(COLORS[(index + 1) % COLORS.length], isBorder ? 255 : 102);
 	}
 
-	public static int nextFillColor(int current)
+	public static Component getColorName(int color)
 	{
-		int idx = findIndex(COLORS, stripAlpha(current));
-		return withAlpha(COLORS[(idx + 1) % COLORS.length], 102);
+		int index = findColorIndex(COLORS, stripAlpha(color));
+		return index == -1 ? Component.literal(String.valueOf(color)) : Component.translatable(NAME_KEYS[index]);
 	}
-
-	public static Component colorName(int color) { return Component.translatable(NAME_KEYS[findIndex(COLORS, stripAlpha(color))]); }
 
 	private static int withAlpha(int color, int alpha) { return alpha << 24 | color & 0xFFFFFF; }
 	private static int stripAlpha(int color) { return color & 0xFFFFFF; }
 
-	private static int findIndex(int[] array, int rgbColor)
+	private static int findColorIndex(int[] array, int color)
 	{
 		for (int i = 0; i < array.length; i++)
 		{
-			if ((array[i] & 0xFFFFFF) == rgbColor)
+			if ((array[i] & 0xFFFFFF) == color)
 				return i;
 		}
 
-		return 0;
+		return -1;
 	}
 }

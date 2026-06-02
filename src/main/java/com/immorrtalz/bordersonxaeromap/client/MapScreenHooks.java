@@ -1,9 +1,9 @@
 package com.immorrtalz.bordersonxaeromap.client;
 
 import com.immorrtalz.bordersonxaeromap.BordersOnXaeroMap;
-import com.immorrtalz.bordersonxaeromap.client.screen.EditZoneScreen;
-import com.immorrtalz.bordersonxaeromap.client.screen.DeleteZoneScreen;
-import com.immorrtalz.bordersonxaeromap.client.screen.HelpScreen;
+import com.immorrtalz.bordersonxaeromap.client.screens.DeleteZoneScreen;
+import com.immorrtalz.bordersonxaeromap.client.screens.EditZoneScreen;
+import com.immorrtalz.bordersonxaeromap.client.screens.HelpScreen;
 import com.immorrtalz.bordersonxaeromap.zone.ZoneArea;
 import com.immorrtalz.bordersonxaeromap.zone.ZoneDimension;
 import com.immorrtalz.bordersonxaeromap.zone.ZoneRepository;
@@ -93,7 +93,6 @@ public final class MapScreenHooks
 		session.drawToggleButton = null;
 		session.editZoneButton = null;
 		session.deleteZoneButton = null;
-		session.helpButton = null;
 	}
 
 	@SubscribeEvent
@@ -192,7 +191,7 @@ public final class MapScreenHooks
 			Component.translatable("borders_on_xaero_map.delete_zone"),
 			button -> deleteFocusedZone(screen)));
 
-		session.helpButton = addToolbarButton(event, new XaeroIconButton(columnX, row5Y, ICON_HELP_U, ICON_HELP_V,
+		addToolbarButton(event, new XaeroIconButton(columnX, row5Y, ICON_HELP_U, ICON_HELP_V,
 			Component.translatable("borders_on_xaero_map.help.title"),
 			button -> openHelpScreen(screen)));
 	}
@@ -1043,7 +1042,6 @@ public final class MapScreenHooks
 		private XaeroIconButton drawToggleButton;
 		private XaeroIconButton editZoneButton;
 		private XaeroIconButton deleteZoneButton;
-		private XaeroIconButton helpButton;
 
 		private void stopSelection()
 		{

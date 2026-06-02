@@ -1,4 +1,4 @@
-package com.immorrtalz.bordersonxaeromap.client.screen;
+package com.immorrtalz.bordersonxaeromap.client.screens;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;

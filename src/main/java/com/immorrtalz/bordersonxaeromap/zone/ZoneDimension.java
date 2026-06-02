@@ -1,5 +1,6 @@
 package com.immorrtalz.bordersonxaeromap.zone;
 
+import com.immorrtalz.bordersonxaeromap.common.ZonePalette;
 import net.minecraft.network.chat.Component;
 import java.util.Collection;
 import java.util.Collections;
@@ -134,7 +135,7 @@ public final class ZoneDimension
 
 		if (zone == null) return false;
 
-		zone.setBorderColor(ZonePalette.nextBorderColor(zone.getBorderColor()));
+		zone.setBorderColor(ZonePalette.nextColor(zone.getBorderColor(), true));
 		return true;
 	}
 
@@ -154,7 +155,7 @@ public final class ZoneDimension
 
 		if (zone == null) return false;
 
-		zone.setFillColor(ZonePalette.nextFillColor(zone.getFillColor()));
+		zone.setFillColor(ZonePalette.nextColor(zone.getFillColor(), false));
 		return true;
 	}
 

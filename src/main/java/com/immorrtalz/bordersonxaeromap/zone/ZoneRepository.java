@@ -3,6 +3,7 @@ package com.immorrtalz.bordersonxaeromap.zone;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.immorrtalz.bordersonxaeromap.BordersOnXaeroMap;
+import com.immorrtalz.bordersonxaeromap.common.ZonePalette;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
@@ -62,10 +63,9 @@ public final class ZoneRepository
 		if (chunkKeys == null || chunkKeys.isEmpty() || chunkKeys.size() > MAX_SELECTION_CHUNKS) return null;
 
 		ZoneDimension dimension = getOrCreateDimension(worldId, dimensionId);
-		int zoneCount = dimension.getZones().size();
 		String defaultName = dimension.nextDefaultZoneName();
-		int border = ZonePalette.defaultBorder(zoneCount);
-		int fill = ZonePalette.defaultFill(zoneCount);
+		int border = ZonePalette.COLORS[0];
+		int fill = ZonePalette.COLORS[0];
 		ZoneArea zone = dimension.createZone(defaultName, border, fill, chunkKeys);
 
 		if (zone != null) save();
