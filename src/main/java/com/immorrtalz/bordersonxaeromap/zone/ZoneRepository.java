@@ -3,6 +3,7 @@ package com.immorrtalz.bordersonxaeromap.zone;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.immorrtalz.bordersonxaeromap.BordersOnXaeroMap;
+import com.immorrtalz.bordersonxaeromap.common.Zone;
 import com.immorrtalz.bordersonxaeromap.common.ZonePalette;
 import java.io.Reader;
 import java.io.Writer;
@@ -19,7 +20,7 @@ public final class ZoneRepository
 {
 	public static final int MAX_SELECTION_CHUNKS = 8192;
 
-	private final Path filePath;
+	/* private final Path filePath;
 	private final Gson gson;
 	private final Map<String, Map<String, ZoneDimension>> worldsById;
 
@@ -45,20 +46,20 @@ public final class ZoneRepository
 		return byDimension.get(normalizeDimensionId(dimensionId));
 	}
 
-	public ZoneArea getZoneAt(String worldId, String dimensionId, int chunkX, int chunkZ)
+	public Zone getZoneAt(String worldId, String dimensionId, int chunkX, int chunkZ)
 	{
 		ZoneDimension dimension = getDimension(worldId, dimensionId);
 		if (dimension == null) return null;
 		return dimension.getZoneAtChunk(chunkX, chunkZ);
 	}
 
-	public ZoneArea createZone(String worldId, String dimensionId, ChunkRect selection)
+	public Zone createZone(String worldId, String dimensionId, ChunkRect selection)
 	{
 		if (selection.area() > MAX_SELECTION_CHUNKS) return null;
 		return createZone(worldId, dimensionId, selection.toChunkKeys());
 	}
 
-	public ZoneArea createZone(String worldId, String dimensionId, Set<Long> chunkKeys)
+	public Zone createZone(String worldId, String dimensionId, Set<Long> chunkKeys)
 	{
 		if (chunkKeys == null || chunkKeys.isEmpty() || chunkKeys.size() > MAX_SELECTION_CHUNKS) return null;
 
@@ -66,7 +67,7 @@ public final class ZoneRepository
 		String defaultName = dimension.nextDefaultZoneName();
 		int border = ZonePalette.COLORS[0];
 		int fill = ZonePalette.COLORS[0];
-		ZoneArea zone = dimension.createZone(defaultName, border, fill, chunkKeys);
+		Zone zone = dimension.createZone(defaultName, border, fill, chunkKeys);
 
 		if (zone != null) save();
 		return zone;
@@ -96,7 +97,7 @@ public final class ZoneRepository
 		return removeChunksFromZone(worldId, dimensionId, zoneId, selection.toChunkKeys());
 	}
 
-	public int removeChunksFromZone(String worldId, String dimensionId, String zoneId, Set<Long> chunkKeys)
+	public int removeChunksFromZone(String worldId, String dimensionId, int zoneId, Set<Long> chunkKeys)
 	{
 		if (chunkKeys == null || chunkKeys.isEmpty() || chunkKeys.size() > MAX_SELECTION_CHUNKS) return 0;
 
@@ -108,7 +109,7 @@ public final class ZoneRepository
 		return changed;
 	}
 
-	public boolean deleteZone(String worldId, String dimensionId, String zoneId) {
+	public boolean deleteZone(String worldId, String dimensionId, int zoneId) {
 		ZoneDimension dimension = getDimension(worldId, dimensionId);
 		if (dimension == null) return false;
 
@@ -205,7 +206,7 @@ public final class ZoneRepository
 				SaveDimension dim = new SaveDimension();
 				world.dimensions.put(dimEntry.getKey(), dim);
 
-				for (ZoneArea zone : dimEntry.getValue().getZones())
+				for (Zone zone : dimEntry.getValue().getZones())
 				{
 					SaveZone zoneSave = new SaveZone();
 					zoneSave.id = zone.getId();
@@ -264,7 +265,7 @@ public final class ZoneRepository
 				{
 					if (saveZone == null || saveZone.id == null || saveZone.name == null || saveZone.chunks == null) continue;
 
-					ZoneArea loaded = new ZoneArea(saveZone.id, saveZone.name, saveZone.borderColor, saveZone.fillColor);
+					Zone loaded = new Zone(saveZone.id, saveZone.name, saveZone.borderColor, saveZone.fillColor);
 
 					for (long key : saveZone.chunks)
 						loaded.addChunk(key);
@@ -315,5 +316,5 @@ public final class ZoneRepository
 		private int borderColor;
 		private int fillColor;
 		private List<Long> chunks = new ArrayList<>();
-	}
+	} */
 }

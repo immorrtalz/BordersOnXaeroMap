@@ -1,17 +1,32 @@
 package com.immorrtalz.bordersonxaeromap;
 
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import com.immorrtalz.bordersonxaeromap.events.data.C2SJoinedWorldEventData;
 
-@Mod(value = BordersOnXaeroMap.MODID, dist = Dist.CLIENT)
-@EventBusSubscriber(modid = BordersOnXaeroMap.MODID, value = Dist.CLIENT)
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent.LoggingIn;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.network.PacketDistributor;
+
 public class BordersOnXaeroMapClient
 {
-	public BordersOnXaeroMapClient() { BordersOnXaeroMap.initializeRepository(); }
+	public BordersOnXaeroMapClient() {}
 
-	@SubscribeEvent
-	static void onClientSetup(FMLClientSetupEvent event) { BordersOnXaeroMap.LOGGER.info("Xaero local zones client initialized."); }
+	public static void init(IEventBus modEventBus)
+	{
+		modEventBus.addListener(BordersOnXaeroMapClient::onClientSetup);
+	}
+
+	static void onClientSetup(FMLClientSetupEvent event)
+	{
+		NeoForge.EVENT_BUS.addListener(BordersOnXaeroMapClient::onClientLoggedIn);
+
+		BordersOnXaeroMap.LOGGER.info("BordersOnXaeroMap client initialized.");
+	}
+
+	static void onClientLoggedIn(LoggingIn event)
+	{
+		BordersOnXaeroMap.LOGGER.info("Client (self) joined a server.");
+		PacketDistributor.sendToServer(new C2SJoinedWorldEventData("Hello from the client!"));
+	}
 }

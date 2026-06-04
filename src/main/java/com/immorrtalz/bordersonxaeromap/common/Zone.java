@@ -3,7 +3,9 @@ package com.immorrtalz.bordersonxaeromap.common;
 import java.util.Set;
 import java.util.UUID;
 
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec2;
 
 public class Zone
 {
@@ -14,9 +16,9 @@ public class Zone
 	private ZoneType type; // 0 = Public, 1 = Private
 	private int borderColor;
 	private int fillColor;
-	private final Set<Integer> chunkIds;
+	private final Set<Long> chunkIds;
 
-	public Zone(int id, Level dimensionLevel, String name, UUID ownerUuid, ZoneType type, int borderColor, int fillColor, Set<Integer> chunkIds)
+	public Zone(int id, Level dimensionLevel, String name, UUID ownerUuid, ZoneType type, int borderColor, int fillColor, Set<Long> chunkIds)
 	{
 		this.id = id;
 		this.dimensionLevel = dimensionLevel;
@@ -35,7 +37,7 @@ public class Zone
 	public ZoneType getType() { return type; }
 	public int getBorderColor() { return borderColor; }
 	public int getFillColor() { return fillColor; }
-	public Set<Integer> getChunkIds() { return chunkIds; }
+	public Set<Long> getChunkIds() { return chunkIds; }
 
 	public Zone setName(String name)
 	{
@@ -61,25 +63,25 @@ public class Zone
 		return this;
 	}
 
-	public Zone addChunk(int chunkId)
+	public Zone addChunk(long chunkId)
 	{
 		this.chunkIds.add(chunkId);
 		return this;
 	}
 
-	public Zone removeChunk(int chunkId)
+	public Zone removeChunk(long chunkId)
 	{
 		this.chunkIds.remove(chunkId);
 		return this;
 	}
 
-	public Zone addChunks(Set<Integer> chunkIds)
+	public Zone addChunks(Set<Long> chunkIds)
 	{
 		this.chunkIds.addAll(chunkIds);
 		return this;
 	}
 
-	public Zone removeChunks(Set<Integer> chunkIds)
+	public Zone removeChunks(Set<Long> chunkIds)
 	{
 		this.chunkIds.removeAll(chunkIds);
 		return this;
@@ -87,4 +89,9 @@ public class Zone
 
 	public int getChunksArea() { return chunkIds.size(); }
 	public int getBlocksArea() { return chunkIds.size() * 256; }
+
+	public static Vec2 getChunkXZ(long chunkId)
+	{
+		return new Vec2(ChunkPos.getX(chunkId), ChunkPos.getZ(chunkId));
+	}
 }

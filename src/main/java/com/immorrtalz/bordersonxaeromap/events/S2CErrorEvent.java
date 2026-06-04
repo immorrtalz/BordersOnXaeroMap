@@ -1,8 +1,8 @@
 package com.immorrtalz.bordersonxaeromap.events;
 
-import com.immorrtalz.bordersonxaeromap.events.EventBus.IEvent;
+import net.neoforged.bus.api.Event;
 
-public final class S2CErrorEvent implements IEvent
+public final class S2CErrorEvent extends Event
 {
 	private final String message;
 

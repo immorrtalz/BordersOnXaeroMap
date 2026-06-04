@@ -9,7 +9,7 @@
 
 ---
 
-This is a simple [open source](https://github.com/immorrtalz/BordersOnXaeroMap) addon for the [Xaero's World Map](https://modrinth.com/mod/xaeros-world-map), which adds visual chunk-based zones (borders) everyone could view on the map.
+This is a simple [open source](https://github.com/immorrtalz/BordersOnXaeroMap) addon for the [Xaero's World Map](https://modrinth.com/mod/xaeros-world-map), which adds visual chunk-based zones (borders) everyone could see on the map.
 
 > ### IMPORTANT
 > The mod is currently in **alpha**, and at the moment it only works locally. It is <ins>expected to have a LOT of fundamental changes</ins> internally.\

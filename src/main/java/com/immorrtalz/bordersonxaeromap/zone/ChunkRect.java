@@ -22,7 +22,7 @@ public record ChunkRect(int left, int top, int right, int bottom) {
 		{
 			for (int z = top; z <= bottom; z++)
 			{
-				result.add(ZoneRepository.packChunk(x, z));
+				// result.add(ZoneRepository.packChunk(x, z));
 			}
 		}
 

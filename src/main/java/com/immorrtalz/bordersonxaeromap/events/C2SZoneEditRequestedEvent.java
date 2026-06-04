@@ -2,9 +2,9 @@ package com.immorrtalz.bordersonxaeromap.events;
 
 import java.util.Set;
 
-import com.immorrtalz.bordersonxaeromap.events.EventBus.IEvent;
+import net.neoforged.bus.api.Event;
 
-public final class C2SZoneEditRequestedEvent implements IEvent
+public final class C2SZoneEditRequestedEvent extends Event
 {
 	private final int zoneId;
 	private final String name;

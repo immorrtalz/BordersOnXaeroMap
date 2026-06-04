@@ -1,8 +1,8 @@
 package com.immorrtalz.bordersonxaeromap.events;
 
-import com.immorrtalz.bordersonxaeromap.events.EventBus.IEvent;
+import net.neoforged.bus.api.Event;
 
-public final class C2SZoneCreationRequestedEvent implements IEvent
+public final class C2SZoneCreationRequestedEvent extends Event
 {
 	private final String name;
 	private final int borderColor;
