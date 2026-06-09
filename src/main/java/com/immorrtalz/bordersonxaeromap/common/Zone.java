@@ -3,9 +3,10 @@ package com.immorrtalz.bordersonxaeromap.common;
 import java.util.Set;
 import java.util.UUID;
 
+import org.joml.Vector2f;
+
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec2;
 
 public class Zone
 {
@@ -89,9 +90,5 @@ public class Zone
 
 	public int getChunksArea() { return chunkIds.size(); }
 	public int getBlocksArea() { return chunkIds.size() * 256; }
-
-	public static Vec2 getChunkXZ(long chunkId)
-	{
-		return new Vec2(ChunkPos.getX(chunkId), ChunkPos.getZ(chunkId));
-	}
+	public static Vector2f getChunkXZ(long chunkId) { return new Vector2f(ChunkPos.getX(chunkId), ChunkPos.getZ(chunkId)); }
 }

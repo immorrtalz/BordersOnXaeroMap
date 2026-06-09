@@ -46,7 +46,7 @@ authors="immorrtalz"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-This is a simple open source addon for the Xaero's World Map, which adds visual chunk-based zones (borders) everyone could see on the map.
+A simple open source addon for the Xaero's World Map, which adds visual chunk-based zones (borders) everyone could see on the map.
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.

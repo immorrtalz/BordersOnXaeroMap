@@ -1,7 +1,5 @@
 package com.immorrtalz.bordersonxaeromap;
 
-import com.immorrtalz.bordersonxaeromap.events.data.C2SJoinedWorldEventData;
-
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent.LoggingIn;
@@ -27,6 +25,6 @@ public class BordersOnXaeroMapClient
 	static void onClientLoggedIn(LoggingIn event)
 	{
 		BordersOnXaeroMap.LOGGER.info("Client (self) joined a server.");
-		PacketDistributor.sendToServer(new C2SJoinedWorldEventData("Hello from the client!"));
+		// PacketDistributor.sendToServer(new C2SJoinedWorldEventData("Hello from the client!"));
 	}
 }

@@ -1,19 +1,14 @@
 package com.immorrtalz.bordersonxaeromap.events;
 
-import com.immorrtalz.bordersonxaeromap.common.Zone;
+import com.immorrtalz.bordersonxaeromap.events.data.S2CZonesSyncEventData;
+
 import net.neoforged.bus.api.Event;
 
 public final class S2CZonesSyncEvent extends Event
 {
-	private final boolean isPartial;
-	private final Zone[] zones;
+	private final S2CZonesSyncEventData data;
 
-	public S2CZonesSyncEvent(boolean isPartial, Zone[] zones)
-	{
-		this.isPartial = isPartial;
-		this.zones = zones;
-	}
+	public S2CZonesSyncEvent(S2CZonesSyncEventData data) { this.data = data; }
 
-	public boolean isPartial() { return isPartial; }
-	public Zone[] getZones() { return zones; }
+	public S2CZonesSyncEventData getData() { return data; }
 }
