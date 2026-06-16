@@ -6,12 +6,11 @@ import java.util.UUID;
 import org.joml.Vector2f;
 
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.Level;
 
 public class Zone
 {
 	private final int id;
-	private final Level dimensionLevel;
+	private final String dimension;
 	private String name;
 	private final UUID ownerUuid;
 	private ZoneType type; // 0 = Public, 1 = Private
@@ -19,10 +18,10 @@ public class Zone
 	private int fillColor;
 	private final Set<Long> chunkIds;
 
-	public Zone(int id, Level dimensionLevel, String name, UUID ownerUuid, ZoneType type, int borderColor, int fillColor, Set<Long> chunkIds)
+	public Zone(int id, String dimension, String name, UUID ownerUuid, ZoneType type, int borderColor, int fillColor, Set<Long> chunkIds)
 	{
 		this.id = id;
-		this.dimensionLevel = dimensionLevel;
+		this.dimension = dimension;
 		this.name = name;
 		this.ownerUuid = ownerUuid;
 		this.type = type;
@@ -31,8 +30,13 @@ public class Zone
 		this.chunkIds = chunkIds;
 	}
 
+	public Zone(int id, String dimension, String name, String ownerUuid, ZoneType type, int borderColor, int fillColor, Set<Long> chunkIds)
+	{
+		this(id, dimension, name, UUID.fromString(ownerUuid), type, borderColor, fillColor, chunkIds);
+	}
+
 	public int getId() { return id; }
-	public Level getDimensionLevel() { return dimensionLevel; }
+	public String getDimension() { return dimension; }
 	public String getName() { return name; }
 	public UUID getOwnerUuid() { return ownerUuid; }
 	public ZoneType getType() { return type; }

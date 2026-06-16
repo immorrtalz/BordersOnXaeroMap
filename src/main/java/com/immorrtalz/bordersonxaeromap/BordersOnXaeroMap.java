@@ -1,7 +1,6 @@
 package com.immorrtalz.bordersonxaeromap;
 
 import com.google.gson.Gson;
-import com.immorrtalz.bordersonxaeromap.client.ClientManager;
 import com.immorrtalz.bordersonxaeromap.common.Zone;
 import com.immorrtalz.bordersonxaeromap.events.data.S2CErrorEventData;
 import com.immorrtalz.bordersonxaeromap.events.data.S2CZonesSyncEventData;
@@ -86,8 +85,8 @@ public class BordersOnXaeroMap
 			String zonesJson = data.zonesJson();
 			List<Zone> zones = gson.fromJson(zonesJson, List.class);
 
-			if (!isPartial) ClientManager.setAllZones(zones);
-			else ClientManager.processZonesSync(zones);
+			if (!isPartial) BordersOnXaeroMapClient.setAllZones(zones);
+			else BordersOnXaeroMapClient.processZonesSync(zones);
 
 			BordersOnXaeroMap.LOGGER.info("Received zones sync from the server: partial={}, json={}", isPartial, zonesJson);
 		}
