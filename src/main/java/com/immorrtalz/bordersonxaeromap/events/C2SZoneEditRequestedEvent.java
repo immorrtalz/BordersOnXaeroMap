@@ -11,9 +11,9 @@ public final class C2SZoneEditRequestedEvent extends Event
 	private final int borderColor;
 	private final int fillColor;
 	private final boolean isPublic;
-	private final Set<Integer> chunkIds;
+	private final Set<Long> chunkIds;
 
-	public C2SZoneEditRequestedEvent(int zoneId, String name, int borderColor, int fillColor, boolean isPublic, Set<Integer> chunkIds)
+	public C2SZoneEditRequestedEvent(int zoneId, String name, int borderColor, int fillColor, boolean isPublic, Set<Long> chunkIds)
 	{
 		this.zoneId = zoneId;
 		this.name = name;
@@ -28,5 +28,5 @@ public final class C2SZoneEditRequestedEvent extends Event
 	public int getBorderColor() { return borderColor; }
 	public int getFillColor() { return fillColor; }
 	public boolean isPublic() { return isPublic; }
-	public Set<Integer> getChunkIds() { return chunkIds; }
+	public Set<Long> getChunkIds() { return chunkIds; }
 }

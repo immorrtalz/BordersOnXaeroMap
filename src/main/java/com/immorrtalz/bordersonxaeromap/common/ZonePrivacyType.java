@@ -1,6 +1,6 @@
 package com.immorrtalz.bordersonxaeromap.common;
 
-public enum ZoneType
+public enum ZonePrivacyType
 {
 	PUBLIC,
 	PRIVATE

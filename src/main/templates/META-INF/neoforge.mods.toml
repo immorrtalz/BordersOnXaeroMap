@@ -46,12 +46,12 @@ authors="immorrtalz"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-A simple open source addon for the Xaero's World Map, which adds visual chunk-based zones (borders) everyone could see on the map.
+A simple addon for the Xaero's World Map, which adds vector and chunk-based zones with borders everyone could see on the map.
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
-#[[mixins]]
-#config="${mod_id}.mixins.json"
+[[mixins]]
+config="bordersonxaeromap.mixins.json"
 
 # The [[accessTransformers]] block allows you to declare where your AT file is.
 # If this block is omitted, a fallback attempt will be made to load an AT from META-INF/accesstransformer.cfg
@@ -80,8 +80,8 @@ A simple open source addon for the Xaero's World Map, which adds visual chunk-ba
 [[dependencies.bordersonxaeromap]]
 	modId="xaeroworldmap"
 	type="required"
-	versionRange="[0,)"
-	ordering="NONE"
+	versionRange="[1.40,)"
+	ordering="AFTER"
 	side="CLIENT"
 
 # Features are specific properties of the game environment, that you may want to declare you require. This example declares
